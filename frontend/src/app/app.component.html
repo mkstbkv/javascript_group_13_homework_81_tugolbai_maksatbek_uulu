@@ -1,0 +1,27 @@
+<div class="container" >
+  <p class="headline">Shorten your link!</p>
+
+  <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+    <mat-form-field appearance="outline" color="warn">
+      <mat-label>URL</mat-label>
+      <input name="originalUrl" placeholder="Enter URL here" required matInput ngModel/>
+    </mat-form-field>
+
+    <div style="margin: 0 auto">
+      <button
+        type="submit"
+        mat-raised-button
+        color="accent"
+        [disabled]="f.invalid"
+      >Shorten!</button>
+    </div>
+  </form>
+
+  <a
+    *ngIf="shortLink"
+    style="text-align: center"
+    href="http://localhost:8000/shortenLinks/{{ shortLink }}"
+     target="_blank"
+     (click)="redirect()">http://localhost:8000/shortenLinks/{{ shortLink }}
+  </a>
+</div>
