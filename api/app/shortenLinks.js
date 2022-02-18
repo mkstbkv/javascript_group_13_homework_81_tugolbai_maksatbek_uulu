@@ -6,13 +6,14 @@ const router = express.Router();
 
 router.get('/:shortUrl', async (req, res, next) => {
     try {
-        const link = await ShortenLink.findById(req.params.shortUrl);
+        const link = await ShortenLink.findOne({shortUrl: req.params.shortUrl});
+        console.log(link);
 
         if (!link) {
             return res.status(404).send({message: 'Not found'});
         }
 
-        res.status(301).redirect(link.originalUrl)
+        res.status(301).redirect(link.originalUrl);
     } catch (e) {
         next(e);
     }
